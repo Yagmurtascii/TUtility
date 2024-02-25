@@ -37,13 +37,28 @@ public class Style {
     public void ButtonStyle(Button button)
     {
         button.setMaxWidth(100);
-        button.setStyle(" -fx-font-size: 1.3em; -fx-background-color: #e0dede;");
-        button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-font-size: 1.3em; -fx-background-color: #57ad57;");
-        });
-        button.setOnMouseExited(event -> {
-            button.setStyle("-fx-font-size: 1.3em; -fx-background-color: #e0dede;");
-        });
+        if(button.getText().equals("S A V E"))
+        {
+            button.setStyle(" -fx-font-size: 1.2em; -fx-background-color: #57ac57;");
+            button.setOnMouseEntered(event -> {
+                button.setStyle("-fx-font-size: 1.2em; -fx-background-color: #3dc03d;");
+            });
+            button.setOnMouseExited(event -> {
+                button.setStyle("-fx-font-size: 1.2em; -fx-background-color: #57ac57;");
+            });
+        }
+        else
+        {
+            button.setStyle(" -fx-font-size: 1.2em; -fx-background-color: #e0dede;");
+            button.setOnMouseEntered(event -> {
+                button.setStyle("-fx-font-size: 1.2em; -fx-background-color: #bab8b8;");
+            });
+            button.setOnMouseExited(event -> {
+                button.setStyle("-fx-font-size: 1.2em; -fx-background-color: #e0dede;");
+            });
+        }
+
+
 
     }
 

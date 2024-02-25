@@ -20,8 +20,6 @@
       <version>17.0.6</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
-    <!-- Hibernate ORM -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
@@ -31,18 +29,9 @@
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
-      <version>8.0.1</version> <!-- veya uygun olan en son sürüm -->
+      <version>8.0.1</version>
       <scope>provided</scope>
     </dependency>
-
-
-    <dependency>
-      <groupId>org.apache.tomcat</groupId>
-      <artifactId>tomcat-api</artifactId>
-      <version>10.0.14</version> <!-- veya uygun olan en son sürüm -->
-      <scope>provided</scope>
-    </dependency>
-
 
     <dependency>
       <groupId>com.microsoft.sqlserver</groupId>
@@ -69,6 +58,7 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
@@ -93,7 +83,6 @@
         <version>0.0.8</version>
         <executions>
           <execution>
-            <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
               <mainClass>com.example.demo/com.example.demo.HelloApplication</mainClass>

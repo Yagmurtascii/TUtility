@@ -121,13 +121,16 @@ public class ComponentsFunction {
         return keepComboBoxValue;
     }
 
-    public void comboBoxAction(ComboBox<String> comboBox1, ComboBox<String> comboBox2, String query) {
+    public void comboBoxAction(TableView tableView,ComboBox<String> comboBox1, ComboBox<String> comboBox2, String query) {
         comboBox1.setOnAction(event ->
         {
             String selectedDatabaseName = comboBox1.getValue();
             schemaList = fillCombobox(comboBox2, query, selectedDatabaseName);
             comboFilter(comboBox2, schemaList);
+            tableView.setEditable(true);
+            comboBox2.setEditable(true);
         });
+
     }
 
     public void clearAll(Stage stage, Button button) {

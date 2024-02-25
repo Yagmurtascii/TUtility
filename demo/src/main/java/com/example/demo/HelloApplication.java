@@ -51,7 +51,7 @@ public class HelloApplication extends Application {
 
         //region TableView
         TableView tableView = new TableView<ProcuderCall>();
-        tableView.setEditable(true);
+        tableView.setEditable(false);
 
         TableColumn<ProcuderCall, String> paramNameColumn = new TableColumn<>("Param Name");
         paramNameColumn.setCellValueFactory(new PropertyValueFactory<>("paramName"));
@@ -113,9 +113,11 @@ public class HelloApplication extends Application {
 
         //region Componenet function
         databaseCombobox.setEditable(true);
-        schemaCombobox.setEditable(true);
+        schemaCombobox.setEditable(false);
+
+
         ObservableList<String> databaseList = functions.fillCombobox(databaseCombobox, databaseNameQuery, null);
-        functions.comboBoxAction(databaseCombobox, schemaCombobox, schemaQuery);
+        functions.comboBoxAction(tableView,databaseCombobox, schemaCombobox, schemaQuery);
         functions.comboFilter(databaseCombobox, databaseList);
         functions.saveButton(values, tableView, save, databaseCombobox, schemaCombobox, procuderNameText);
         functions.clearAll(stage, clear);
