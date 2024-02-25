@@ -6,7 +6,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -52,24 +51,8 @@ public class Application extends javafx.application.Application {
         Button save = new Button("S A V E");
         Button clear = new Button("C L E A R");
 
+        functions.alertWindow();
 
-        //region Alert
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        Label info=new Label("TUtility");
-        style.LabelStyle(info);
-        alert.setTitle(info.getText());
-        alert.setHeaderText("Procedure Definition");
-        alert.setContentText("Procedure Definition is Created");
-        alert.getDialogPane().setStyle("-fx-background-color: #eaeaea;-fx-font-size: 1.5em");
-        alert.getDialogPane().setMinHeight(400);
-
-        alert.getDialogPane().setMaxWidth(400);
-        ImageView icon = new ImageView("icon.png");
-        icon.setFitHeight(48);
-        icon.setFitWidth(48);
-        alert.getDialogPane().setGraphic(icon);
-        alert.showAndWait();
-        //endregion
 
         //region TableView
         TableView tableView = new TableView<ProcedureDefinition>();

@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,6 +23,27 @@ public class ComponentsFunction {
     ConfigurationSettings configurationSettings = new ConfigurationSettings();
     SessionFactory sessionFactory = configurationSettings.createConfig();
 
+    public void alertWindow()
+    {
+        Style style=new Style();
+        //region Alert
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Label info=new Label("TUtility");
+        style.LabelStyle(info);
+        alert.setTitle(info.getText());
+        alert.setHeaderText("Procedure Definition");
+        alert.setContentText("Procedure Definition is Created");
+        alert.getDialogPane().setStyle("-fx-background-color: #eaeaea;-fx-font-size: 1.5em");
+        alert.getDialogPane().setMinHeight(400);
+
+        alert.getDialogPane().setMaxWidth(400);
+        ImageView icon = new ImageView("icon.png");
+        icon.setFitHeight(48);
+        icon.setFitWidth(48);
+        alert.getDialogPane().setGraphic(icon);
+        alert.showAndWait();
+        //endregion
+    }
 
     public ObservableList<String> fillCombobox(ComboBox<String> comboBox, String query, String parameter) {
         System.out.println(getValue(query, parameter));
@@ -88,7 +110,6 @@ public class ComponentsFunction {
                                 session.save(procedureDefinition);
                                 transaction.commit();
                             }
-
                         } catch (IndexOutOfBoundsException ex) {
                             System.err.println("Veritabanına kaydetme işlemi sırasında hata oluştu: " + ex.getMessage());
                             ex.printStackTrace();
@@ -188,6 +209,7 @@ public class ComponentsFunction {
     public void clearAll(Stage stage, Button button) {
         button.setOnAction(event -> {
             Platform.runLater(() -> {
+                stage.close();
                 new Application().start(new Stage());
                 stage.close();
             });
