@@ -136,7 +136,7 @@ public class ComponentsFunction {
     public void clearAll(Stage stage, Button button) {
         button.setOnAction(event -> {
             Platform.runLater(() -> {
-                new HelloApplication().start(new Stage());
+                new Application().start(new Stage());
                 stage.close();
             });
         });

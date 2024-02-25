@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -16,7 +15,7 @@ import javafx.util.converter.IntegerStringConverter;
 import java.util.List;
 
 
-public class HelloApplication extends Application {
+public class Application extends javafx.application.Application {
     ComponentsFunction functions = new ComponentsFunction();
 
     @Override
