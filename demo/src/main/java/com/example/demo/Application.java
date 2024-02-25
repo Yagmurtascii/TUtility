@@ -36,6 +36,8 @@ public class Application extends javafx.application.Application {
         HBox generalInputHBox = new HBox();
         HBox buttonHBox = new HBox();
 
+        Label message = new Label(functions.returnMessage());
+
         Label databaseName = new Label("DATABASE NAME: ");
         Label schemaName = new Label("SCHEMA NAME: ");
         Label procudereName = new Label("PROCURE NAME: ");
@@ -63,8 +65,7 @@ public class Application extends javafx.application.Application {
         TableColumn<ProcedureDefinition, String> paramTypeColumn = new TableColumn<>("Param Type");
         paramTypeColumn.setCellValueFactory(new PropertyValueFactory<>("paramType"));
         List<String> values = functions.paramTypeColumnComboBox(paramTypeColumn);
-
-
+        
         TableColumn<ProcedureDefinition, Integer> orderNumberColumn = new TableColumn<>("Order Number");
         orderNumberColumn.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
         orderNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
@@ -73,6 +74,7 @@ public class Application extends javafx.application.Application {
             ProcedureDefinition procuderCall = event.getRowValue();
             procuderCall.setOrderNumber(event.getNewValue());
         });
+
 
         TableColumn<ProcedureDefinition, Integer> statusColumn = new TableColumn<>("Status");
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
@@ -108,15 +110,23 @@ public class Application extends javafx.application.Application {
             });
             return row;
         });
+
+        tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                tableView.getSelectionModel().clearSelection();
+            }
+        });
+
+
         //endregion
 
         //region Componenet function
         databaseCombobox.setEditable(true);
-        schemaCombobox.setEditable(false);
+
 
 
         ObservableList<String> databaseList = functions.fillCombobox(databaseCombobox, databaseNameQuery, null);
-        functions.comboBoxAction(tableView,databaseCombobox, schemaCombobox, schemaQuery);
+        functions.comboBoxAction(procuderNameText,tableView,databaseCombobox, schemaCombobox, schemaQuery);
         functions.comboFilter(databaseCombobox, databaseList);
         functions.saveButton(values, tableView, save, databaseCombobox, schemaCombobox, procuderNameText);
         functions.clearAll(stage, clear);
@@ -144,6 +154,7 @@ public class Application extends javafx.application.Application {
         generalUIComponent.getChildren().addAll(generalInputHBox, tableView, buttonVBox);
         root.getChildren().addAll(generalUIComponent);
         //endregion
+
 
         Scene scene = new Scene(root, 1600, 1000);
         stage.setTitle("TUtility");
