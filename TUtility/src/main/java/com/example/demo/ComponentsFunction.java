@@ -112,6 +112,8 @@ public class ComponentsFunction {
                                 transaction.commit();
                                 alertWindow("TUtility","Procedure Definition" ,"Procedure Definition is Created");
                             }
+                            else
+                                alertWindow("TUtility","Procedure Definition" ,"Procedure Definition is Failed");
                         } catch (IndexOutOfBoundsException ex) {
                             System.err.println("Veritabanına kaydetme işlemi sırasında hata oluştu: " + ex.getMessage());
                             ex.printStackTrace();
@@ -120,6 +122,7 @@ public class ComponentsFunction {
                 }
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(e);
+                alertWindow("TUtility","Procedure Definition" ,"Procedure Definition is Failed");
             }
         });
     }
