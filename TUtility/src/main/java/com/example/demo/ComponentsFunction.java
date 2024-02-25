@@ -87,27 +87,16 @@ public class ComponentsFunction {
                                 Transaction transaction = session.beginTransaction();
                                 session.save(procedureDefinition);
                                 transaction.commit();
-                                messages.setMessage("Created is succesfull");
-                                returnMessages(messages.getMessage());
-                    ;
                             }
-                            else {
-                                messages.setMessage("Created is failed");
-                                returnMessages(messages.getMessage());
 
-                            }
                         } catch (IndexOutOfBoundsException ex) {
                             System.err.println("Veritabanına kaydetme işlemi sırasında hata oluştu: " + ex.getMessage());
                             ex.printStackTrace();
                         }
                     }
-                } else {
-                    messages.setMessage("You can not create. Your table size is 0.");
-                    returnMessages(messages.getMessage());
                 }
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(e);
-
             }
         });
     }
