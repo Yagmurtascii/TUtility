@@ -36,7 +36,7 @@ public class Application extends javafx.application.Application {
 
         HBox generalInputHBox = new HBox();
         HBox buttonHBox = new HBox();
-        
+
         Label databaseName = new Label("DATABASE NAME: ");
         Label schemaName = new Label("SCHEMA NAME: ");
         Label procedureName = new Label("PROCURE NAME: ");

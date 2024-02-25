@@ -17,7 +17,6 @@ import java.util.List;
 public class ComponentsFunction {
     ObservableList<String> schemaList;
     List<String> keepComboBoxValue = new ArrayList<>();
-    Messages messages=new Messages();
     String paramTypeQuery = "SELECT DISTINCT paramType FROM ProcedureDefinition";
 
     ConfigurationSettings configurationSettings = new ConfigurationSettings();
