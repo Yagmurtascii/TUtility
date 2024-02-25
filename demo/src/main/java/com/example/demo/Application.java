@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -17,9 +18,10 @@ import java.util.List;
 
 public class Application extends javafx.application.Application {
     ComponentsFunction functions = new ComponentsFunction();
-
+    private Stage primaryStage;
     @Override
     public void start(Stage stage) {
+        primaryStage=stage;
 
         String schemaQuery = "SELECT DISTINCT schemaName FROM ProcedureDefinition WHERE databaseName = :parameter";
         String databaseNameQuery = "SELECT DISTINCT databaseName FROM ProcedureDefinition";
@@ -36,19 +38,38 @@ public class Application extends javafx.application.Application {
         HBox generalInputHBox = new HBox();
         HBox buttonHBox = new HBox();
 
-        Label message = new Label(functions.returnMessage());
+        Label de = new Label(functions.messages.getMessage());
 
         Label databaseName = new Label("DATABASE NAME: ");
         Label schemaName = new Label("SCHEMA NAME: ");
-        Label procudereName = new Label("PROCURE NAME: ");
+        Label procedureName = new Label("PROCURE NAME: ");
 
-        TextField procuderNameText = new TextField();
+        TextField procedureNameText = new TextField();
 
         ComboBox<String> databaseCombobox = new ComboBox<>();
         ComboBox<String> schemaCombobox = new ComboBox<>();
 
         Button save = new Button("S A V E");
         Button clear = new Button("C L E A R");
+
+
+        //region Alert
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Label info=new Label("TUtility");
+        style.LabelStyle(info);
+        alert.setTitle(info.getText());
+        alert.setHeaderText("Procedure Definition");
+        alert.setContentText("Procedure Definition is Created");
+        alert.getDialogPane().setStyle("-fx-background-color: #eaeaea;-fx-font-size: 1.5em");
+        alert.getDialogPane().setMinHeight(400);
+
+        alert.getDialogPane().setMaxWidth(400);
+        ImageView icon = new ImageView("icon.png");
+        icon.setFitHeight(48);
+        icon.setFitWidth(48);
+        alert.getDialogPane().setGraphic(icon);
+        alert.showAndWait();
+        //endregion
 
         //region TableView
         TableView tableView = new TableView<ProcedureDefinition>();
@@ -58,21 +79,21 @@ public class Application extends javafx.application.Application {
         paramNameColumn.setCellValueFactory(new PropertyValueFactory<>("paramName"));
         paramNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         paramNameColumn.setOnEditCommit(event -> {
-            ProcedureDefinition procuderCall = event.getRowValue();
-            procuderCall.setParamName(event.getNewValue());
+            ProcedureDefinition procedureDefinition = event.getRowValue();
+            procedureDefinition.setParamName(event.getNewValue());
         });
 
         TableColumn<ProcedureDefinition, String> paramTypeColumn = new TableColumn<>("Param Type");
         paramTypeColumn.setCellValueFactory(new PropertyValueFactory<>("paramType"));
         List<String> values = functions.paramTypeColumnComboBox(paramTypeColumn);
-        
+
         TableColumn<ProcedureDefinition, Integer> orderNumberColumn = new TableColumn<>("Order Number");
         orderNumberColumn.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
         orderNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         orderNumberColumn.setOnEditCommit(event ->
         {
-            ProcedureDefinition procuderCall = event.getRowValue();
-            procuderCall.setOrderNumber(event.getNewValue());
+            ProcedureDefinition procedureDefinition = event.getRowValue();
+            procedureDefinition.setOrderNumber(event.getNewValue());
         });
 
 
@@ -82,8 +103,8 @@ public class Application extends javafx.application.Application {
         statusColumn.setOnEditCommit(event ->
 
         {
-            ProcedureDefinition procuderCall = event.getRowValue();
-            procuderCall.setStatus(event.getNewValue());
+            ProcedureDefinition procedureDefinition = event.getRowValue();
+            procedureDefinition.setStatus(event.getNewValue());
         });
 
         TableColumn<ProcedureDefinition, Integer> isOutCursorColumn = new TableColumn<>("Is Out Cursor");
@@ -92,8 +113,8 @@ public class Application extends javafx.application.Application {
         isOutCursorColumn.setOnEditCommit(event ->
 
         {
-            ProcedureDefinition procuderCall = event.getRowValue();
-            procuderCall.setIsoutcursor(event.getNewValue());
+            ProcedureDefinition procedureDefinition = event.getRowValue();
+            procedureDefinition.setIsoutcursor(event.getNewValue());
         });
 
         tableView.getColumns().addAll(paramNameColumn, paramTypeColumn, orderNumberColumn, statusColumn, isOutCursorColumn);
@@ -122,20 +143,19 @@ public class Application extends javafx.application.Application {
 
         //region Componenet function
         databaseCombobox.setEditable(true);
-
-
-
         ObservableList<String> databaseList = functions.fillCombobox(databaseCombobox, databaseNameQuery, null);
-        functions.comboBoxAction(procuderNameText,tableView,databaseCombobox, schemaCombobox, schemaQuery);
+        functions.comboBoxAction(procedureNameText,tableView,databaseCombobox, schemaCombobox, schemaQuery);
         functions.comboFilter(databaseCombobox, databaseList);
-        functions.saveButton(values, tableView, save, databaseCombobox, schemaCombobox, procuderNameText);
+        functions.saveButton(values, tableView, save, databaseCombobox, schemaCombobox, procedureNameText);
+        System.out.println(de.getText()+"şlfgşdfld");
         functions.clearAll(stage, clear);
         //endregion
+
 
         //region Style
         style.LabelStyle(databaseName);
         style.LabelStyle(schemaName);
-        style.LabelStyle(procudereName);
+        style.LabelStyle(procedureName);
         style.VboxStyle(labelVBox);
         style.VboxStyle(comboAndFieldVBox);
         style.TableViewStyle(tableView, orderNumberColumn, 2);
@@ -146,8 +166,8 @@ public class Application extends javafx.application.Application {
         //endregion
 
         //region End Nodes
-        labelVBox.getChildren().addAll(databaseName, schemaName, procudereName);
-        comboAndFieldVBox.getChildren().addAll(databaseCombobox, schemaCombobox, procuderNameText);
+        labelVBox.getChildren().addAll(databaseName, schemaName, procedureName);
+        comboAndFieldVBox.getChildren().addAll(databaseCombobox, schemaCombobox, procedureNameText);
         generalInputHBox.getChildren().addAll(labelVBox, comboAndFieldVBox);
         buttonHBox.getChildren().addAll(clear, save);
         buttonVBox.getChildren().addAll(save, clear);
@@ -167,5 +187,6 @@ public class Application extends javafx.application.Application {
     public static void main(String[] args) {
         launch();
     }
+
 
 }

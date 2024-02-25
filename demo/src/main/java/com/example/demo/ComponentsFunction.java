@@ -16,10 +16,12 @@ import java.util.List;
 public class ComponentsFunction {
     ObservableList<String> schemaList;
     List<String> keepComboBoxValue = new ArrayList<>();
+    Messages messages=new Messages();
     String paramTypeQuery = "SELECT DISTINCT paramType FROM ProcedureDefinition";
 
     ConfigurationSettings configurationSettings = new ConfigurationSettings();
     SessionFactory sessionFactory = configurationSettings.createConfig();
+
 
     public ObservableList<String> fillCombobox(ComboBox<String> comboBox, String query, String parameter) {
         System.out.println(getValue(query, parameter));
@@ -65,7 +67,7 @@ public class ComponentsFunction {
         });
     }
 
-    String messages = "";
+
 
     public void saveButton(List<String> list, TableView tableView, Button button, ComboBox<String> combo1, ComboBox<String> combo2, TextField textField) {
         button.setOnAction(event -> {
@@ -85,18 +87,34 @@ public class ComponentsFunction {
                                 Transaction transaction = session.beginTransaction();
                                 session.save(procedureDefinition);
                                 transaction.commit();
+                                messages.setMessage("Created is succesfull");
+                                returnMessages(messages.getMessage());
+                    ;
+                            }
+                            else {
+                                messages.setMessage("Created is failed");
+                                returnMessages(messages.getMessage());
+
                             }
                         } catch (IndexOutOfBoundsException ex) {
                             System.err.println("Veritabanına kaydetme işlemi sırasında hata oluştu: " + ex.getMessage());
                             ex.printStackTrace();
                         }
                     }
-                } else
-                    System.out.println("Lütfen kayıt girin");
+                } else {
+                    messages.setMessage("You can not create. Your table size is 0.");
+                    returnMessages(messages.getMessage());
+                }
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(e);
+
             }
         });
+    }
+    public String returnMessages(String m)
+    {
+        System.out.println(m);
+        return m;
     }
 
     public boolean checkSave(ProcedureDefinition procedureDefinition) {
@@ -104,18 +122,14 @@ public class ComponentsFunction {
         if (procedureDefinition.getDatabaseName() != "" && procedureDefinition.getSchemaName() != null
                 && procedureDefinition.getProcedureName() != "" && procedureDefinition.getParamType() != ""
                 && procedureDefinition.getParamName() != null) {
-            messages = "Created is Successful";
+
             return true;
         } else {
-            messages = "Created is Failed";
+
             return false;
         }
     }
 
-    public String returnMessage()
-    {
-        return messages;
-    }
     public List<String> paramTypeColumnComboBox(TableColumn<ProcedureDefinition, String> tableColumn) {
         List<String> paramTypeList = getValue(paramTypeQuery, null);
         ObservableList<String> paramTypes = FXCollections.observableArrayList(paramTypeList);
@@ -169,11 +183,8 @@ public class ComponentsFunction {
                             if(!selectedDatabaseName2.equals(""))
                                 tableView.setEditable(true);
                         });
-
-
                     }
                 });
-
             }
             else
             {
