@@ -47,7 +47,6 @@ public class ComponentsFunction {
     }
 
     public ObservableList<String> fillCombobox(ComboBox<String> comboBox, String query, String parameter) {
-        System.out.println(getValue(query, parameter));
         ObservableList<String> databaseList = FXCollections.observableArrayList();
         databaseList.addAll(getValue(query, parameter));
         comboBox.getItems().clear();
@@ -104,7 +103,6 @@ public class ComponentsFunction {
                         procedureDefinition.setProcedureName(textField.getText());
                         procedureDefinition.setSchemaName(combo2.getValue());
                         try (Session session = sessionFactory.openSession()) {
-                            System.out.println(checkSave(procedureDefinition));
                             if(checkSave(procedureDefinition)==true)
                             {
                                 Transaction transaction = session.beginTransaction();
@@ -115,22 +113,17 @@ public class ComponentsFunction {
                             else
                                 alertWindow("TUtility","Procedure Definition" ,"Procedure Definition is Failed");
                         } catch (IndexOutOfBoundsException ex) {
-                            System.err.println("Veritabanına kaydetme işlemi sırasında hata oluştu: " + ex.getMessage());
                             ex.printStackTrace();
                         }
                     }
                 }
             } catch (IndexOutOfBoundsException e) {
-                System.out.println(e);
+
                 alertWindow("TUtility","Procedure Definition" ,"Procedure Definition is Failed");
             }
         });
     }
-    public String returnMessages(String m)
-    {
-        System.out.println(m);
-        return m;
-    }
+
 
     public boolean checkSave(ProcedureDefinition procedureDefinition) {
 
@@ -180,7 +173,6 @@ public class ComponentsFunction {
         comboBox1.setOnAction(event ->
         {
             String selectedDatabaseName = comboBox1.getValue();
-            System.out.println("Selected "+selectedDatabaseName);
             if(!selectedDatabaseName.equals("")) {
                 schemaList = fillCombobox(comboBox2, query, selectedDatabaseName);
                 comboFilter(comboBox2, schemaList);
@@ -188,13 +180,11 @@ public class ComponentsFunction {
                 comboBox2.setOnAction(e->
                 {
                     String selectedDatabaseName1 = comboBox2.getValue();
-                    System.out.println("Selected "+selectedDatabaseName1);
                     if(!selectedDatabaseName1.equals("") || selectedDatabaseName1==null)
                     {
                         textField.setEditable(true);
                         textField.textProperty().addListener((observable, oldValue, newValue) -> {
                             String selectedDatabaseName2 = newValue;
-                            System.out.println("Selected "+selectedDatabaseName2);
                             if(!selectedDatabaseName2.equals(""))
                                 tableView.setEditable(true);
                         });

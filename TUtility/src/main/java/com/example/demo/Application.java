@@ -36,9 +36,7 @@ public class Application extends javafx.application.Application {
 
         HBox generalInputHBox = new HBox();
         HBox buttonHBox = new HBox();
-
-        Label de = new Label(functions.messages.getMessage());
-
+        
         Label databaseName = new Label("DATABASE NAME: ");
         Label schemaName = new Label("SCHEMA NAME: ");
         Label procedureName = new Label("PROCURE NAME: ");
@@ -130,7 +128,6 @@ public class Application extends javafx.application.Application {
         functions.comboBoxAction(procedureNameText,tableView,databaseCombobox, schemaCombobox, schemaQuery);
         functions.comboFilter(databaseCombobox, databaseList);
         functions.saveButton(values, tableView, save, databaseCombobox, schemaCombobox, procedureNameText);
-        System.out.println(de.getText()+"şlfgşdfld");
         functions.clearAll(stage, clear);
         //endregion
 
