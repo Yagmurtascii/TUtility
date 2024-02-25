@@ -22,8 +22,8 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) {
 
-        String schemaQuery = "SELECT DISTINCT schemaName FROM ProcuderCall WHERE databaseName = :parameter";
-        String databaseNameQuery = "SELECT DISTINCT databaseName FROM ProcuderCall";
+        String schemaQuery = "SELECT DISTINCT schemaName FROM ProcedureDefinition WHERE databaseName = :parameter";
+        String databaseNameQuery = "SELECT DISTINCT databaseName FROM ProcedureDefinition";
 
         Style style = new Style();
 
