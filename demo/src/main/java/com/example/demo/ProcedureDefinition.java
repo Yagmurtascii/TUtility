@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "procuder_table")
-public class ProcuderCall {
+public class ProcedureDefinition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,7 +18,7 @@ public class ProcuderCall {
     private int isOutCursor;
 
 
-    public ProcuderCall(String s, String s1, int i, int i1, int i2) {
+    public ProcedureDefinition(String s, String s1, int i, int i1, int i2) {
     }
 
     public String getDatabaseName() {
@@ -93,10 +93,10 @@ public class ProcuderCall {
         this.isOutCursor = isoutcursor;
     }
 
-    public ProcuderCall() {
+    public ProcedureDefinition() {
     }
 
-    public ProcuderCall(String databaseName, String schemaName, String procedureName, String paramName, String paramType, int orderNumber, int status, int isoutcursor) {
+    public ProcedureDefinition(String databaseName, String schemaName, String procedureName, String paramName, String paramType, int orderNumber, int status, int isoutcursor) {
         this.databaseName = databaseName;
         this.schemaName = schemaName;
         this.procedureName = procedureName;

@@ -68,10 +68,10 @@ public class ComponentsFunction {
 
     public void saveButton(List<String> list, TableView tableView, Button button, ComboBox<String> combo1, ComboBox<String> combo2, TextField textField) {
         button.setOnAction(event -> {
-            ObservableList<ProcuderCall> items = tableView.getItems();
+            ObservableList<ProcedureDefinition> items = tableView.getItems();
             System.out.println(items.size());
             for (int i = 0; i < items.size(); i++) {
-                ProcuderCall procuderCall = items.get(i);
+                ProcedureDefinition procuderCall = items.get(i);
                 procuderCall.setParamType(list.get(i));
                 procuderCall.setDatabaseName(combo1.getValue());
                 procuderCall.setProcedureName(textField.getText());
@@ -88,12 +88,12 @@ public class ComponentsFunction {
         });
     }
 
-    public List<String> paramTypeColumnComboBox(TableColumn<ProcuderCall, String> tableColumn) {
+    public List<String> paramTypeColumnComboBox(TableColumn<ProcedureDefinition, String> tableColumn) {
         List<String> paramTypeList = getValue(paramTypeQuery, null);
         ObservableList<String> paramTypes = FXCollections.observableArrayList(paramTypeList);
         FilteredList<String> filteredParamTypes = new FilteredList<>(paramTypes);
         tableColumn.setCellFactory(column -> {
-            return new TableCell<ProcuderCall, String>() {
+            return new TableCell<ProcedureDefinition, String>() {
                 private final ComboBox<String> comboBox = new ComboBox<>(filteredParamTypes);
 
                 {

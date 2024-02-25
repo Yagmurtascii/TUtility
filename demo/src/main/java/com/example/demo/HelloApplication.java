@@ -50,61 +50,61 @@ public class HelloApplication extends Application {
         Button clear = new Button("C L E A R");
 
         //region TableView
-        TableView tableView = new TableView<ProcuderCall>();
+        TableView tableView = new TableView<ProcedureDefinition>();
         tableView.setEditable(false);
 
-        TableColumn<ProcuderCall, String> paramNameColumn = new TableColumn<>("Param Name");
+        TableColumn<ProcedureDefinition, String> paramNameColumn = new TableColumn<>("Param Name");
         paramNameColumn.setCellValueFactory(new PropertyValueFactory<>("paramName"));
         paramNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         paramNameColumn.setOnEditCommit(event -> {
-            ProcuderCall procuderCall = event.getRowValue();
+            ProcedureDefinition procuderCall = event.getRowValue();
             procuderCall.setParamName(event.getNewValue());
         });
 
-        TableColumn<ProcuderCall, String> paramTypeColumn = new TableColumn<>("Param Type");
+        TableColumn<ProcedureDefinition, String> paramTypeColumn = new TableColumn<>("Param Type");
         paramTypeColumn.setCellValueFactory(new PropertyValueFactory<>("paramType"));
         List<String> values = functions.paramTypeColumnComboBox(paramTypeColumn);
 
 
-        TableColumn<ProcuderCall, Integer> orderNumberColumn = new TableColumn<>("Order Number");
+        TableColumn<ProcedureDefinition, Integer> orderNumberColumn = new TableColumn<>("Order Number");
         orderNumberColumn.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
         orderNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         orderNumberColumn.setOnEditCommit(event ->
         {
-            ProcuderCall procuderCall = event.getRowValue();
+            ProcedureDefinition procuderCall = event.getRowValue();
             procuderCall.setOrderNumber(event.getNewValue());
         });
 
-        TableColumn<ProcuderCall, Integer> statusColumn = new TableColumn<>("Status");
+        TableColumn<ProcedureDefinition, Integer> statusColumn = new TableColumn<>("Status");
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         statusColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         statusColumn.setOnEditCommit(event ->
 
         {
-            ProcuderCall procuderCall = event.getRowValue();
+            ProcedureDefinition procuderCall = event.getRowValue();
             procuderCall.setStatus(event.getNewValue());
         });
 
-        TableColumn<ProcuderCall, Integer> isOutCursorColumn = new TableColumn<>("Is Out Cursor");
+        TableColumn<ProcedureDefinition, Integer> isOutCursorColumn = new TableColumn<>("Is Out Cursor");
         isOutCursorColumn.setCellValueFactory(new PropertyValueFactory<>("isoutcursor"));
         isOutCursorColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         isOutCursorColumn.setOnEditCommit(event ->
 
         {
-            ProcuderCall procuderCall = event.getRowValue();
+            ProcedureDefinition procuderCall = event.getRowValue();
             procuderCall.setIsoutcursor(event.getNewValue());
         });
 
         tableView.getColumns().addAll(paramNameColumn, paramTypeColumn, orderNumberColumn, statusColumn, isOutCursorColumn);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        tableView.getItems().add(new ProcuderCall("", "", 0, 0, 0));
+        tableView.getItems().add(new ProcedureDefinition("", "", 0, 0, 0));
 
         tableView.setRowFactory(tv ->
         {
-            TableRow<ProcuderCall> row = new TableRow<>();
+            TableRow<ProcedureDefinition> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1 && row.isEmpty()) {
-                    tableView.getItems().add(new ProcuderCall("", "", 0, 0, 0));
+                    tableView.getItems().add(new ProcedureDefinition("", "", 0, 0, 0));
                 }
             });
             return row;
@@ -146,7 +146,7 @@ public class HelloApplication extends Application {
         root.getChildren().addAll(generalUIComponent);
         //endregion
 
-        Scene scene = new Scene(root, 700, 700);
+        Scene scene = new Scene(root, 1600, 1000);
         stage.setTitle("TUtility");
         stage.setScene(scene);
         stage.getIcons().add(new Image(getClass().getResource("/Images/TUtility.png").toExternalForm()));
