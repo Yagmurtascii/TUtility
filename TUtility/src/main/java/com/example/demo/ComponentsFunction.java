@@ -23,16 +23,17 @@ public class ComponentsFunction {
     ConfigurationSettings configurationSettings = new ConfigurationSettings();
     SessionFactory sessionFactory = configurationSettings.createConfig();
 
-    public void alertWindow()
+    public void alertWindow(String title, String header, String content)
     {
+
         Style style=new Style();
         //region Alert
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        Label info=new Label("TUtility");
+        Label info=new Label(title);
         style.LabelStyle(info);
         alert.setTitle(info.getText());
-        alert.setHeaderText("Procedure Definition");
-        alert.setContentText("Procedure Definition is Created");
+        alert.setHeaderText(header);
+        alert.setContentText(content);
         alert.getDialogPane().setStyle("-fx-background-color: #eaeaea;-fx-font-size: 1.5em");
         alert.getDialogPane().setMinHeight(400);
 
@@ -109,6 +110,7 @@ public class ComponentsFunction {
                                 Transaction transaction = session.beginTransaction();
                                 session.save(procedureDefinition);
                                 transaction.commit();
+                                alertWindow("TUtility","Procedure Definition" ,"Procedure Definition is Created");
                             }
                         } catch (IndexOutOfBoundsException ex) {
                             System.err.println("Veritabanına kaydetme işlemi sırasında hata oluştu: " + ex.getMessage());

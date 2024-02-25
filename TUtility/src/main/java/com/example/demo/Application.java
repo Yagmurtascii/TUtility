@@ -51,7 +51,7 @@ public class Application extends javafx.application.Application {
         Button save = new Button("S A V E");
         Button clear = new Button("C L E A R");
 
-        functions.alertWindow();
+
 
 
         //region TableView
